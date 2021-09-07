@@ -1,0 +1,102 @@
+<!doctype html>
+<head>
+    <title>Vehicle Info</title>
+    <style>
+        body{
+            background-image: url("/static/bg2.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-left:14% ;
+            margin-top:5%;
+            background-color: #fff;
+            
+
+        }
+
+        .container{
+            
+            background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); 
+            width: 70%;
+           
+            height: fit-content;
+            padding: 50px;
+            color: rgb(34, 18, 18);
+            opacity: 1;
+            box-shadow: 0 4px 8px 0 rgba(20, 20, 19, 0.938), 0 6px 20px 0 rgb(16, 17, 17);
+            border-radius: 12px;
+            
+        }
+        h3{
+            color:black;
+        }
+
+        #image{
+            float :right;
+        }
+
+    </style>
+</head>
+<body onload="loadDoc()">
+  <div class="container">
+    <h1>Vehicle Number Plate :
+        <h1 id="x">
+            {{ numplate|join('') }}
+        </h1>    
+    </h1>
+     
+<u><h1>Vehicle Information</h1></u>
+<!--button onclick="loadDoc()"></button-->
+  <div class="a" >
+      <div id="image"></div>
+      <div class="b">
+    
+        <h2>Description:<h3 id="desc"></h3></h2>  
+        <h2>RegistrationDate:<h3 id="regdate"></h3></h2>
+        <h2>EngineNumber:<h3 id="engno"></h3></h2>
+        <h2>Owner:<h3 id="owner"></h3></h2>
+        <h2>Insurance:<h3 id="insurance"></h3></h2>
+        <h2>Variant:<h3 id="variant"></h3></h2>
+    
+      </div>
+  </div> 
+</div>  
+  <script>
+  function loadDoc() {
+  var numplate = document.getElementById("x").innerHTML
+           // alert(x)
+            console.log("API Initiated")
+            var xhttp = new XMLHttpRequest();
+           // var numplate = x
+            console.log("getting Details...")
+            console.log(numplate)
+            xhttp.open("GET", `https://www.regcheck.org.uk/api/reg.asmx/CheckIndia?RegistrationNumber=${numplate}&username=<username>`, false);
+            xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState == 4 && xhttp.status == 200)
+                    {
+                        var doc = xhttp.responseXML;
+                        var jsondoc = doc.getElementsByTagName("Vehicle")[0].getElementsByTagName("vehicleJson")[0].firstChild.nodeValue;
+                        obj = JSON.parse(jsondoc)
+                        // putting the value to html element
+                        document.getElementById("desc").innerHTML=obj.Description
+                        document.getElementById("regdate").innerHTML=obj.RegistrationDate
+                        document.getElementById("engno").innerHTML=obj.EngineNumber
+                        document.getElementById("owner").innerHTML=obj.Owner
+                        document.getElementById("insurance").innerHTML=obj.Insurance
+                        document.getElementById("variant").innerHTML=obj.Variant
+                        img_fun(obj.ImageUrl)
+                    }
+                };
+                xhttp.send(null);
+            }
+           function img_fun(imgURL) {
+            var img = document.createElement('img');
+            img.style.borderRadius="12px";
+            img.src = imgURL;
+            img.setAttribute("height","200px")
+            document.getElementById('image').appendChild(img);
+        } 
+
+  </script>
+ </body>   
+
+ </html>

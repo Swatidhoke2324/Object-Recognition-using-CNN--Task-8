@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>ANPR webapp</title>
+        <style>
+            body{
+                background-image: url("/static/bg.jpeg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                text-align: center;
+                background-color: #fff;
+                margin-bottom: 2%;
+    
+            }
+            .container{
+                margin-top: 10%;
+                background: #000; 
+                width: 60%;
+                height: fit-content;
+                margin-left: 20%;
+                text-align: center;
+                color: #fff;
+                opacity: 0.7;
+                padding: 3%;
+                box-shadow: 0 4px 8px 0 rgba(145, 236, 41, 0.938), 0 6px 20px 0 rgb(41, 161, 161);
+                border-radius: 12px;
+                
+            }
+    
+    
+            @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+    
+            h1{
+                margin-top: 40px;
+                font-family: 'Ubuntu', sans-serif;
+                font-size: 40px;
+                font-weight: bold;
+                color: #fff;
+                text-align: center;
+                letter-spacing: 5px;
+                text-shadow: 3px 3px 20px #ff99cc,
+                    -2px 1px 30px #ff99cc;
+            }
+    
+            
+    
+            #button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 10px 2px;
+                cursor: pointer;
+                }
+    
+            #button {border-radius: 12px;}
+    
+            input[type=file] {
+                width: fit-content;
+                padding: 20px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                border: 2px solid red;
+                border-radius: 4px;
+                background:coral;
+                font-weight: bold;
+                }
+                p{
+                    font-weight: bold;
+                }
+    
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <p><h1>Automatic Number Plate Recognition</h1></p>
+            <div class="row">
+                <form method="post" action="/" enctype="multipart/form-data">
+                    <dl>
+                        <p>
+                            <input placeholder="Upload the image of the car" type="file" name="file"  required >
+                        </p>
+                    </dl>
+                    <p>
+                        <input type="submit" value="UPLOAD" id="button"></input>
+                    </p>
+                </form>
+            </div>
+        </div>
+        
+    
+</body>
+</html>
